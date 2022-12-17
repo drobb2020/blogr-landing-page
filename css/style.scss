@@ -1,0 +1,513 @@
+@mixin flex-box($orientation) {
+  width: 100%;
+  display: flex;
+  flex-direction: $orientation;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin font_style($family, $size, $color) {
+  @if $family == null or $size == null or $color == null {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: red;
+  }
+  font-family: $family, sans-serif;
+  font-size: $size;
+  color: $color;
+  text-align: center;
+}
+
+@mixin btn_basic {
+  padding: 1em;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 30px;
+}
+
+ol,
+li {
+  list-style: none;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 70%;
+}
+header {
+  display: flex;
+  position: relative;
+  min-height: 90vh;
+  min-width: 430px;
+  background-color: rgb(206, 64, 73);
+  background-image: url(../assets/img/bg-pattern-intro.svg);
+  background-position: -50vh -30vh;
+  background-size: 195vh;
+  background-repeat: repeat;
+  border-bottom-left-radius: 100px;
+  ._gradient {
+    position: absolute;
+    width: 100%;
+    min-height: 90vh;
+    background: rgb(254, 76, 88);
+    background: -moz-linear-gradient(
+      180deg,
+      rgba(254, 76, 88, 1) 0%,
+      rgba(254, 76, 88, 0.8687850140056023) 37%,
+      rgba(254, 76, 88, 0.7539390756302521) 80%
+    );
+    background: -webkit-linear-gradient(
+      180deg,
+      rgba(254, 76, 88, 1) 0%,
+      rgba(254, 76, 88, 0.8687850140056023) 37%,
+      rgba(254, 76, 88, 0.7539390756302521) 80%
+    );
+    background: linear-gradient(
+      180deg,
+      rgba(254, 76, 88, 1) 0%,
+      rgba(254, 76, 88, 0.8687850140056023) 37%,
+      rgba(254, 76, 88, 0.7539390756302521) 80%
+    );
+    border-bottom-left-radius: 100px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fe4c58",endColorstr="#fe4c58",GradientType=1);
+  }
+  nav {
+    @include flex-box(row);
+    position: absolute;
+    max-width: 100%;
+    min-width: 100%;
+    margin-top: 2em;
+    z-index: 3;
+    .logo {
+      width: 70%;
+      padding: 2.5em;
+      img {
+        width: 7em;
+      }
+    }
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30%;
+    }
+    > ul {
+      @include flex-box(column);
+      display: none;
+      justify-content: flex-start;
+      position: fixed;
+      top: 15%;
+      width: 80%;
+      min-height: 75vh;
+      padding: 1.5em;
+      background-color: #fff;
+      box-shadow: 0 0 1.4em rgba(0, 0, 0, 0.342);
+      .links {
+        @include flex-box(column);
+        li {
+          width: 100%;
+          a {
+            @include font_style('Overpass', 1rem, #000);
+            display: block;
+            padding: 1em;
+            font-weight: bold;
+            text-decoration: none;
+            img {
+              padding-left: 0.5em;
+              transition: 0.5s ease;
+            }
+          }
+          ul {
+            display: none;
+            width: 100%;
+            padding: 0;
+            background-color: #efeff1;
+            li {
+              width: auto;
+            }
+          }
+        }
+      }
+      .session {
+        @include flex-box(column);
+        gap: 1em;
+        a {
+          @include font_style('Overpass', 1rem, #000);
+          display: block;
+          width: 50%;
+          padding: 1em;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: bold;
+        }
+        .login {
+          background-color: transparent;
+        }
+        .sign-up {
+          color: #fff;
+          background-color: #ff4958;
+        }
+      }
+    }
+  }
+  .post-header {
+    @include flex-box(column);
+    width: 100%;
+    min-height: 90vh;
+    max-height: 90vh;
+    position: absolute;
+    h1 {
+      @include font_style('Overpass', 1.8rem, #fff);
+      width: 80%;
+    }
+    p {
+      @include font_style('Ubuntu', 1rem, rgba(255, 255, 255, 0.781));
+      width: 80%;
+      line-height: 1.5;
+    }
+    .started-btn {
+      @include flex-box(row);
+      gap: 1.5em;
+      margin-top: 1em;
+      width: 80%;
+      a {
+        @include font_style('Ubuntu', 0.8rem, #000);
+        @include btn_basic();
+        font-weight: bold;
+        width: 7em;
+      }
+      .filled {
+        background-color: #fff;
+        color: rgb(254, 76, 88);
+      }
+      .empty {
+        border: 1px solid #fff;
+        color: #fff;
+      }
+    }
+  }
+}
+
+main {
+  @include flex-box(column);
+  min-width: 430px;
+  .content-wrapper {
+    @include flex-box(column);
+    margin-top: 6em;
+    min-width: 400px;
+    margin-bottom: 5em;
+    position: relative;
+    h2 {
+      @include font_style('Overpass', 1.7rem, rgb(27, 24, 24));
+      width: 70%;
+      margin: auto;
+      font-weight: 900;
+    }
+    .picture-img {
+      display: block;
+      margin-top: 4em;
+      margin-bottom: 4em;
+      z-index: 2;
+      img {
+        width: 100%;
+      }
+    }
+    .content-text {
+      @include font_style('Ubuntu', 1.1rem, rgba(49, 43, 43, 0.747));
+      width: 80%;
+      min-width: 400px;
+      margin: auto;
+      h2 {
+        margin-top: 2em;
+      }
+      p {
+        line-height: 2;
+      }
+    }
+    .picture-img.img_text {
+      position: absolute;
+      top: -30vh;
+      margin-bottom: 5vh;
+      img {
+        width: 380px;
+      }
+    }
+    .content-text.bg_pattern {
+      min-height: 130vh;
+      width: 100%;
+      background-color: rgb(28, 29, 41);
+      background-color: linear-gradient(
+        90deg,
+        rgba(28, 29, 41, 1) 0%,
+        rgba(52, 55, 79, 1) 50%,
+        rgba(58, 61, 92, 1) 100%
+      );
+      background-image: url(../assets/img/bg-pattern-circles.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: -25vh -42vh;
+      border-bottom-left-radius: 100px;
+      border-top-right-radius: 100px;
+      h2,
+      p {
+        width: 80%;
+        margin: auto;
+      }
+      h2 {
+        @include font_style('Overpass', 2.1rem, #fff);
+        font-weight: 700;
+        margin-top: 40vh;
+        margin-bottom: 1em;
+      }
+      p {
+        @include font_style('Ubuntu', 1rem, rgb(204, 183, 183));
+      }
+    }
+  }
+  .content-wrapper.wrapper_filled {
+    margin-top: 60%;
+  }
+}
+
+footer {
+  min-width: 410px;
+  background-color: #24242c;
+  padding: 1em;
+  border-top-right-radius: 140px;
+  h2 {
+    @include font_style('Overpass', 2.8rem, #fff);
+    width: 100%;
+  }
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    h3 {
+      @include font_style('Ubuntu', 1rem, #fff);
+      font-weight: 600;
+      padding: 1em;
+    }
+    a {
+      @include font_style('Ubuntu', 0.9rem, rgba(216, 199, 199, 0.877));
+      text-decoration: none;
+    }
+  }
+  .attribution {
+    @include font_style('Overpass', 0.7rem, #fff);
+    h3 {
+      @include font_style('Overpass', 1rem, #fff);
+      padding: 1em;
+    }
+  }
+  .attribution a {
+    line-height: 2;
+    color: hsl(174, 52%, 38%);
+  }
+}
+
+@media (min-width: 1000px) {
+  body::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(215, 215, 223);
+    border-radius: 20px;
+  }
+
+  header {
+    nav {
+      margin-top: 5em;
+      .logo {
+        width: 6%;
+        padding-right: 4em;
+      }
+      .nav-toggle {
+        display: none;
+      }
+      ul {
+        @include flex-box(row);
+        position: initial;
+        min-height: auto;
+        width: 70%;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+        .links {
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 0;
+          li {
+            width: auto;
+            ul {
+              display: none;
+              position: absolute;
+              width: 13%;
+              background-color: #fff;
+              box-shadow: 0 0 1em rgba(0, 0, 0, 0.342);
+              border-radius: 10px;
+              a {
+                text-align: left;
+                color: #000;
+              }
+            }
+            a {
+              color: #fff;
+            }
+            img {
+              padding-left: 0.5em;
+            }
+          }
+        }
+        .session {
+          flex-direction: row;
+          width: 50%;
+          padding-right: 6em;
+          .login {
+            color: #fff;
+            background-color: transparent;
+          }
+          .sign-up {
+            background-color: #fff;
+            color: #ff4958;
+          }
+          .sign-up:hover {
+            color: #fff;
+            background-color: #fd7b87;
+          }
+        }
+      }
+    }
+    .post-header {
+      h1 {
+        font-size: 3rem;
+      }
+      .started-btn {
+        .filled:hover {
+          color: #fff;
+          background-color: #fd7b87;
+        }
+        .empty:hover {
+          background-color: #fff;
+          color: #ff4958;
+        }
+      }
+    }
+  }
+  main {
+    overflow: hidden;
+    .content-wrapper {
+      position: relative;
+      flex-direction: row-reverse;
+      > h2 {
+        top: 0;
+        position: absolute;
+      }
+      .picture-img {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        position: relative;
+        img {
+          width: 700px;
+          position: absolute;
+          right: -7rem;
+        }
+      }
+      .content-text {
+        width: 50%;
+        padding: 6em;
+        text-align: left;
+        margin-top: 3em;
+      }
+      .picture-img.img_text {
+        position: absolute;
+        top: -15%;
+        left: 10%;
+        width: 40%;
+        img {
+          display: block;
+          position: initial;
+          width: 90%;
+          margin: 0;
+        }
+      }
+      .content-text.bg_pattern {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-end;
+        min-height: 30vh;
+        background-position: -500px -900px;
+        h2,
+        p {
+          width: 50%;
+          margin: 0;
+          text-align: left;
+        }
+        h2 {
+          margin-top: 4vh;
+        }
+        p {
+          font-size: 1.1rem;
+          margin-bottom: 4vh;
+        }
+      }
+    }
+    .content-wrapper.wrapper_filled {
+      align-items: flex-end;
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+    .content-wrapper.content-fin {
+      flex-flow: row;
+      .picture-img img {
+        left: -36%;
+      }
+    }
+  }
+  footer {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .logo {
+      width: 25%;
+      margin-top: 1rem;
+      margin-left: 4rem;
+      padding-left: 4rem;
+    }
+    .section {
+      display: flex;
+      align-items: start;
+      width: 25%;
+      margin-top: 1rem;
+      h3 {
+        padding: 0;
+      }
+      a {
+        padding: .5em 0;
+      }
+      a:last-of-type {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  a {
+    color: hsl(228, 45%, 44%);
+    font-weight: 300;
+    font-family: 'Ubuntu', sans-serif;
+  }
+}
